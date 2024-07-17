@@ -20,8 +20,8 @@ const artCategories = [
 </script>
 
 <template>
-  <div class="h-screen flex justify-center items-center bg-gray-100">
-    <div class="catContainer p-5 bg-white rounded-lg flex flex-col justify-center">
+  <div class="h-screen flex justify-center bg-white border-r-2 border-gray-100 my-5">
+    <div class="catContainer h-fit mt-2 p-5 bg-gray-100 rounded-lg flex flex-col justify-center">
       <a
         href="#"
         v-for="category in artCategories"
@@ -36,7 +36,6 @@ const artCategories = [
 
 <style scoped>
 .catContainer {
-  width: 210px;
-  height: 85%;
+  width: 200px;
 }
 </style>

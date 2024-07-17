@@ -5,18 +5,16 @@ import NavBar from "@/components/NavBar.vue";
 </script>
 
 <template>
-  <div>
-    <NavBar />
-  </div>
+  <NavBar />
 
   <div class="flex">
-    <div class="h-screen leftPanel">
+    <div class="leftPanel">
       <SideBar />
     </div>
 
     <div class="no-scrollbar h-screen rightPanel overflow-y-scroll">
       <div class="py-10 mt-12 px-7 text-center flex flex-col justify-start items-center">
-        <h2 class="poppins-font-semibold text-[#6545ba] mt-2 text-3xl md:text-4xl lg:text-4xl">
+        <h2 class="poppins-font-bold text-[#6545ba] mt-2 text-3xl md:text-4xl lg:text-4xl">
           The Best Art Inspiration, Tutorials, and More.
         </h2>
         <p class="poppins-font-regular text-gray-500 mt-2 md:w-full lg:w-3/4">
@@ -26,7 +24,7 @@ import NavBar from "@/components/NavBar.vue";
           quality.
         </p>
       </div>
-
+      <hr class="h-px bg-gray-200 border-0 mb-7 mx-5" />
       <VideoList />
     </div>
   </div>
@@ -35,6 +33,7 @@ import NavBar from "@/components/NavBar.vue";
 <style scoped>
 .leftPanel {
   width: 20%;
+  height: 100vh;
 }
 
 .rightPanel {

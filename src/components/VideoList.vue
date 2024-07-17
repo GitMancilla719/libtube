@@ -1,12 +1,15 @@
 <script setup>
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import VideoPlayer from "@/components/VideoPlayer.vue";
 
 const youtubeData = ref({});
+const selectedYTVideo = ref();
 
 const fetchYoutubeData = async () => {
-  const apiKey = "AIzaSyBPy_-cpvlW3q8T2J9_ihATyu8UL_52BV0";
-  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=arts&maxResults=50&key=${apiKey}`;
+  const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=arts&maxResults=50&key=${
+    import.meta.env.VITE_API_KEY
+  }`;
   try {
     const response = await axios.get(url);
 
@@ -39,6 +42,12 @@ const fetchYoutubeData = async () => {
     console.error("Error fetching video titles:", error);
   }
 };
+const showModal = ref(false);
+
+const modalToggle = (value, indexOfYt) => {
+  showModal.value = value;
+  selectedYTVideo.value = youtubeData.value[indexOfYt];
+};
 
 onMounted(fetchYoutubeData);
 </script>
@@ -46,10 +55,14 @@ onMounted(fetchYoutubeData);
 <template>
   <div class="main-container flex flex-row justify-center items-center flex-wrap">
     <div v-for="(data, index) in youtubeData" :key="index">
-      <a
+      <!-- <a
         v-if="data.thumbnail"
         :href="`https://www.youtube.com/watch?v=${data.videoId}`"
         target="_blank"
+        class="relative group thumbBox rounded-lg m-3 flex flex-col"
+      > -->
+      <button
+        @click="modalToggle(true, index)"
         class="relative group thumbBox rounded-lg m-3 flex flex-col"
       >
         <div class="overflow-hidden rounded-lg">
@@ -66,8 +79,18 @@ onMounted(fetchYoutubeData);
         >
           {{ data.fullTitle }}
         </span>
-      </a>
+      </button>
+
+      <!-- </a> -->
     </div>
+  </div>
+
+  <div>
+    <VideoPlayer
+      :showModal="showModal"
+      :modalToggle="modalToggle"
+      :selectedYTVideo="selectedYTVideo"
+    />
   </div>
 </template>
 
